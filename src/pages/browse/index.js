@@ -9,7 +9,7 @@ const Browse = () => (
     <Title>Navegar</Title>
 
     <List>
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
           alt="Playlist"
@@ -17,7 +17,7 @@ const Browse = () => (
         <strong>Melhores do Rock</strong>
         <p>Relaxe enquanto você programa ouvindo as melhores do rock mundial!</p>
       </Playlist>
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
           alt="Playlist"
@@ -25,7 +25,7 @@ const Browse = () => (
         <strong>Melhores do Rock</strong>
         <p>Relaxe enquanto você programa ouvindo as melhores do rock mundial!</p>
       </Playlist>
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
           alt="Playlist"
@@ -33,7 +33,7 @@ const Browse = () => (
         <strong>Melhores do Rock</strong>
         <p>Relaxe enquanto você programa ouvindo as melhores do rock mundial!</p>
       </Playlist>
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
           alt="Playlist"
