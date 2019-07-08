@@ -1,48 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as PlaylistsActions } from '../../store/ducks/playlists';
 
 import {
   Container, Title, List, Playlist,
 } from './styles';
 
-const Browse = () => (
-  <Container>
-    <Title>Navegar</Title>
+class Browse extends Component {
+  static propTypes = {
+    getPlaylistRequest: PropTypes.func.isRequired,
+    playlists: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          title: PropTypes.string,
+          description: PropTypes.string,
+          thumbnail: PropTypes.string,
+        }),
+      ),
+    }).isRequired,
+  };
 
-    <List>
-      <Playlist to="/playlists/1">
-        <img
-          src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
-          alt="Playlist"
-        />
-        <strong>Melhores do Rock</strong>
-        <p>Relaxe enquanto você programa ouvindo as melhores do rock mundial!</p>
-      </Playlist>
-      <Playlist to="/playlists/1">
-        <img
-          src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
-          alt="Playlist"
-        />
-        <strong>Melhores do Rock</strong>
-        <p>Relaxe enquanto você programa ouvindo as melhores do rock mundial!</p>
-      </Playlist>
-      <Playlist to="/playlists/1">
-        <img
-          src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
-          alt="Playlist"
-        />
-        <strong>Melhores do Rock</strong>
-        <p>Relaxe enquanto você programa ouvindo as melhores do rock mundial!</p>
-      </Playlist>
-      <Playlist to="/playlists/1">
-        <img
-          src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
-          alt="Playlist"
-        />
-        <strong>Melhores do Rock</strong>
-        <p>Relaxe enquanto você programa ouvindo as melhores do rock mundial!</p>
-      </Playlist>
-    </List>
-  </Container>
-);
+  componentDidMount() {
+    const { getPlaylistRequest } = this.props;
 
-export default Browse;
+    getPlaylistRequest();
+  }
+
+  render() {
+    const { playlists } = this.props;
+    return (
+      <Container>
+        <Title>Navegar</Title>
+
+        <List>
+          {playlists.data.map(playlist => (
+            <Playlist key={playlist.id} to="/playlists/1">
+              <img src={playlist.thumbnail} alt={playlist.title} />
+              <strong>{playlist.title}</strong>
+              <p>{playlist.description}</p>
+            </Playlist>
+          ))}
+        </List>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  playlists: state.playlists,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(PlaylistsActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Browse);
