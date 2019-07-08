@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 
+import playlits from './playlists';
+
 const reducers = combineReducers({
-  // Remova essa linha depois de adicionar seus ducks
-  example: () => [],
+  playlits,
 });
 
 export default reducers;
