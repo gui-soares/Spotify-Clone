@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as PlaylistDetailsActions } from '../../store/ducks/playlistDetails';
+import { Creators as PLayerActions } from '../../store/ducks/player';
+
+import ClockIcon from '../../assets/images/clock.svg';
+import PlusIcon from '../../assets/images/plus.svg';
 
 import { Container, Header, SongList } from './styles';
 
 import Loading from '../../components/Loading';
-
-import ClockIcon from '../../assets/images/clock.svg';
-import PlusIcon from '../../assets/images/plus.svg';
 
 class Playlist extends Component {
   static propTypes = {
@@ -36,6 +37,7 @@ class Playlist extends Component {
       loading: PropTypes.bool,
     }).isRequired,
     getPlaylistDetailsRequest: PropTypes.func.isRequired,
+    loadSong: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -50,15 +52,14 @@ class Playlist extends Component {
   }
 
   loadPlaylistDetails = () => {
-    const { match } = this.props;
+    const { match, getPlaylistDetailsRequest } = this.props;
     const { id } = match.params;
-    const { getPlaylistDetailsRequest } = this.props;
 
     getPlaylistDetailsRequest(id);
   };
 
   renderDetails = () => {
-    const { playlistDetails } = this.props;
+    const { playlistDetails, loadSong } = this.props;
     const playlist = playlistDetails.data;
 
     return (
@@ -90,7 +91,7 @@ class Playlist extends Component {
               </tr>
             ) : (
               playlist.songs.map(song => (
-                <tr key={song.id}>
+                <tr key={song.id} onDoubleClick={() => loadSong(song)}>
                   <td>
                     <img src={PlusIcon} alt="Adicionar" />
                   </td>
@@ -123,7 +124,7 @@ const mapStateToProps = state => ({
   playlistDetails: state.playlistDetails,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(PlaylistDetailsActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...PlaylistDetailsActions, ...PLayerActions }, dispatch);
 
 export default connect(
   mapStateToProps,

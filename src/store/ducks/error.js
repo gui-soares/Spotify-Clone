@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   message: null,
 };
 
-export default function PlaylistDetails(state = INITIAL_STATE, action) {
+export default function Errors(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.SET:
       return { ...state, visible: true, message: action.payload.message };
