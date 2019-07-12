@@ -149,7 +149,10 @@ const mapStateToProps = state => ({
   duration: msToTime(state.player.duration),
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...PlaylistDetailsActions, ...PLayerActions }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  ...PlaylistDetailsActions,
+  ...PLayerActions,
+}, dispatch);
 
 export default connect(
   mapStateToProps,
