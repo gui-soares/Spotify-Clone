@@ -14,6 +14,7 @@ import {
 } from './styles';
 
 import Loading from '../../components/Loading';
+import { msToTime } from '../../components/Player/index';
 
 class Playlist extends Component {
   static propTypes = {
@@ -43,6 +44,7 @@ class Playlist extends Component {
     currentSong: PropTypes.shape({
       id: PropTypes.number,
     }).isRequired,
+    duration: PropTypes.string.isRequired,
   };
 
   state = {
@@ -68,7 +70,12 @@ class Playlist extends Component {
   };
 
   renderDetails = () => {
-    const { playlistDetails, loadSong, currentSong } = this.props;
+    const {
+      playlistDetails,
+      loadSong,
+      currentSong,
+      duration,
+    } = this.props;
     const { selectedSong } = this.state;
     const playlist = playlistDetails.data;
 
@@ -114,7 +121,7 @@ class Playlist extends Component {
                   <td>{song.title}</td>
                   <td>{song.author}</td>
                   <td>{song.album}</td>
-                  <td>3:45</td>
+                  <td>{duration}</td>
                 </SongItem>
               ))
             )}
@@ -139,6 +146,7 @@ class Playlist extends Component {
 const mapStateToProps = state => ({
   playlistDetails: state.playlistDetails,
   currentSong: state.player.currentSong,
+  duration: msToTime(state.player.duration),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...PlaylistDetailsActions, ...PLayerActions }, dispatch);
