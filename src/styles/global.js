@@ -22,6 +22,9 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
   }
 
+  button{
+    cursor: pointer;
+  }
 
 
 `;
