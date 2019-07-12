@@ -155,7 +155,7 @@ const mapStateToProps = state => ({
   duration: msToTime(state.player.duration),
   positionShown: msToTime(state.player.positionShown),
   progress: parseInt(
-    (state.player.positionShown || state.player.position) * (1000 / state.player.duration), 
+    (state.player.positionShown || state.player.position) * (1000 / state.player.duration),
     10,
   ) || 0,
 });
